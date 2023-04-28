@@ -1,10 +1,11 @@
+import { UserAuthGuard } from './board/strategy/user-access.strategy';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BoardModule } from './board/board.module';
-import { UserStrategy } from './board/strategy/access.strategy';
+import { AuthGuard } from './board/strategy/me-access.strategy';
 import { TypeOrmConfigService } from './config/typeorm.config.service';
 
 @Module({
@@ -18,6 +19,6 @@ import { TypeOrmConfigService } from './config/typeorm.config.service';
     BoardModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UserStrategy],
+  providers: [AppService, AuthGuard, UserAuthGuard],
 })
 export class AppModule {}
